@@ -82,8 +82,7 @@ familyData.forEach(person => {
   const overlay = document.createElement("div");
   overlay.className = "overlay";
   overlay.innerHTML = `
-    <span class="name">${person.name}</span>
-    <span class="relation">${person.relation}</span>
+    <span class="name"><span class="relation-tag">(${person.relation})</span> ${person.name}</span>
   `;
 
   // מספרים רנדומליים לצפיות ולייקים
@@ -161,8 +160,8 @@ function createPlaceholder(relation) {
    MODAL — OPEN
 ============================================================== */
 function openModal(person) {
-  modalName.textContent     = person.name;
-  modalRelation.textContent = person.relation;
+  modalName.innerHTML = `<span class="relation-tag">(${person.relation})</span> ${person.name}`;
+  modalRelation.textContent = "";
   modalDesc.textContent     = person.description;
 
   backdrop.classList.add("open");

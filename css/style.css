@@ -242,16 +242,16 @@ header h1 {
 
 .overlay .name {
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   text-align: center;
+  line-height: 1.4;
 }
 
-.overlay .relation {
-  color: #f5d7a8;
-  font-size: 0.9rem;
-  margin-top: 4px;
-  text-align: center;
+.relation-tag {
+  color: #7dd6f5;
+  font-weight: 400;
+  font-size: 0.9em;
 }
 
 /* =========================================================
