@@ -229,7 +229,7 @@ header h1 {
 }
 
 .card:hover .overlay {
-  opacity: 1;
+  opacity: 0;
 }
 
 /* תווית שם — תמיד גלויה */
