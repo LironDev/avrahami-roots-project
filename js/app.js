@@ -86,8 +86,54 @@ familyData.forEach(person => {
     <span class="relation">${person.relation}</span>
   `;
 
+  // מספרים רנדומליים לצפיות ולייקים
+  const baseViews = Math.floor(Math.random() * 451) + 50;   // 50–500
+  const baseLikes = Math.floor(Math.random() * 91)  + 10;   // 10–100
+  let likes    = baseLikes;
+  let liked    = false;
+
+  const stats = document.createElement("div");
+  stats.className = "card-stats";
+  stats.innerHTML = `
+    <span class="stat views">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+      <span class="views-count">${baseViews}</span>
+    </span>
+    <span class="stat likes" role="button" tabindex="0" aria-label="לייק">
+      <svg class="heart-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      <span class="likes-count">${likes}</span>
+    </span>
+  `;
+
+  // לחיצה על לב — toggle like
+  const likeBtn = stats.querySelector(".likes");
+  const likeCount = stats.querySelector(".likes-count");
+  const heartIcon = stats.querySelector(".heart-icon");
+
+  likeBtn.addEventListener("click", e => {
+    e.stopPropagation(); // לא לפתוח את המודאל
+    liked = !liked;
+    likes = liked ? baseLikes + 1 : baseLikes;
+    likeCount.textContent = likes;
+    heartIcon.classList.toggle("liked", liked);
+
+    // אנימציית פעימה
+    heartIcon.classList.add("pulse");
+    setTimeout(() => heartIcon.classList.remove("pulse"), 350);
+  });
+
+  likeBtn.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") likeBtn.click();
+  });
+
   card.appendChild(imgEl);
   card.appendChild(overlay);
+  card.appendChild(stats);
 
   card.addEventListener("click", () => openModal(person));
   card.addEventListener("keydown", e => {
