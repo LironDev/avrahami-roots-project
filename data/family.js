@@ -15,8 +15,8 @@ const familyData = [
     name: "לירון אברהמי",
     relation: "אבא",
     description: "",
-    youtubeId: "",
-    imagePath: "images/liron.jpg"
+    youtubeId: "lqBDTkHX1wc",
+    imagePath: "images/Liron.png"
   },
   {
     id: 2,
@@ -39,8 +39,8 @@ const familyData = [
     name: "מעין אברהמי",
     relation: "אחות",
     description: "",
-    youtubeId: "",
-    imagePath: "images/מעין.png"
+    youtubeId: "k3nvmMxEsaY",
+    imagePath: "images/Maayan.png"
   },
   {
     id: 5,
