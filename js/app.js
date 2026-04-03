@@ -79,11 +79,14 @@ familyData.forEach(person => {
     this.replaceWith(createPlaceholder(person.relation));
   };
 
+  // שכבת הכהיה בהוור בלבד (ללא טקסט)
   const overlay = document.createElement("div");
   overlay.className = "overlay";
-  overlay.innerHTML = `
-    <span class="name"><span class="relation-tag">(${person.relation})</span> ${person.name}</span>
-  `;
+
+  // תווית שם — תמיד גלויה בראש הכרטיס
+  const label = document.createElement("div");
+  label.className = "card-label";
+  label.innerHTML = `<span class="relation-tag">(${person.relation})</span> ${person.name}`;
 
   // מספרים רנדומליים לצפיות ולייקים
   const baseViews = Math.floor(Math.random() * 9500) + 1200;  // 1,200–10,700
@@ -132,6 +135,7 @@ familyData.forEach(person => {
 
   card.appendChild(imgEl);
   card.appendChild(overlay);
+  card.appendChild(label);
   card.appendChild(stats);
 
   card.addEventListener("click", () => openModal(person));
