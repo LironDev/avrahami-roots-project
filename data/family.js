@@ -14,7 +14,7 @@ const familyData = [
     id: 1,
     name: "לירון אברהמי",
     relation: "אבא",
-    description: "",
+    description: "אבא לירון מספר על ילדותו, הדרך שעשה עד להקמת המשפחה, וכיצד השורשים והערכים שקיבל מהוריו מלווים אותו עד היום. בראיון הוא גם חושף מה הוא הכי רוצה להעביר לנויה, ליאיר, לאילי ולמעין.",
     youtubeId: "lqBDTkHX1wc",
     imagePath: "images/Liron.png"
   },
@@ -22,7 +22,7 @@ const familyData = [
     id: 2,
     name: "זהבית אברהמי",
     relation: "אמא",
-    description: "",
+    description: "אמא זהבית מספרת על המשפחה שממנה צמחה, על הרגעים שעיצבו אותה, ועל האהבה שמחברת את כולנו יחד. היא משתפת בזיכרונות חמים מהבית שגדלה בו ומה המשמעות של מושג 'משפחה' עבורה.",
     youtubeId: "",
     imagePath: "images/zahavit.jpg"
   },
@@ -38,7 +38,7 @@ const familyData = [
     id: 4,
     name: "מעין אברהמי",
     relation: "אחות",
-    description: "",
+    description: "אחות מעין מספרת על החיים בבית אברהמי מהצד שלה — הרגעים המשעשעים, הויכוחים האחיים, והדברים שהיא הכי אוהבת במשפחה שלנו. בראיון היא גם מגלה מה החלומות שלה לעתיד.",
     youtubeId: "k3nvmMxEsaY",
     imagePath: "images/Maayan.png"
   },
