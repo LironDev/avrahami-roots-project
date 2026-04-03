@@ -24,7 +24,7 @@ const familyData = [
     relation: "אמא",
     description: "אמא זהבית מספרת על המשפחה שממנה צמחה, על הרגעים שעיצבו אותה, ועל האהבה שמחברת את כולנו יחד. היא משתפת בזיכרונות חמים מהבית שגדלה בו ומה המשמעות של מושג 'משפחה' עבורה.",
     youtubeId: "",
-    imagePath: "images/zahavit.jpg"
+    imagePath: "images/Zehavit.png"
   },
   {
     id: 3,
