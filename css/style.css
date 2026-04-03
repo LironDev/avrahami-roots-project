@@ -92,11 +92,18 @@ header h1 {
   line-height: 1.6;
 }
 
-.about-byline {
-  font-size: 0.82rem !important;
-  color: var(--color-accent) !important;
+/* =========================================================
+   FOOTER
+========================================================= */
+.site-footer {
+  flex-shrink: 0;
+  background: var(--color-header-bg);
+  color: var(--color-header-fg);
+  text-align: center;
+  padding: 10px 24px;
+  font-size: 1rem;
   font-weight: 600;
-  margin-top: 2px;
+  letter-spacing: 0.03em;
 }
 
 /* =========================================================
@@ -112,8 +119,7 @@ header h1 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 22px;
-  height: 100%;
-  align-content: center;
+  align-content: start;
 }
 
 /* =========================================================
