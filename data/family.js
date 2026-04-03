@@ -12,20 +12,46 @@
 const familyData = [
   {
     id: 1,
-    // שם מלא של בן/בת המשפחה
-    name: "משה אברהמי",
-    // הקשר המשפחתי (סבא, סבתא, דוד, דודה וכו')
-    relation: "סבא",
-    // תיאור קצר של הראיון — יוצג בחלון הקופץ לצד הסרטון
-    description: "סבא משה מספר על ילדותו בעיר הקטנה, על העלייה לארץ בשנות החמישים ועל הימים הראשונים בקיבוץ. בראיון הוא משתף בזיכרונות מרגשים מחגי ילדות ומספר כיצד פגש את סבתא רחל.",
-    // מזהה הסרטון ביוטיוב — החלק שאחרי ?v= בקישור יוטיוב
-    // לדוגמה: https://www.youtube.com/watch?v=dQw4w9WgXcQ → "dQw4w9WgXcQ"
-    youtubeId: "dQw4w9WgXcQ",
-    // נתיב התמונה — הקובץ חייב להיות בתיקיית images/ עם אותו שם בדיוק!
-    imagePath: "images/saba.jpg"
+    name: "לירון אברהמי",
+    relation: "אבא",
+    description: "",
+    youtubeId: "",
+    imagePath: "images/liron.jpg"
   },
   {
     id: 2,
+    name: "זהבית אברהמי",
+    relation: "אמא",
+    description: "",
+    youtubeId: "",
+    imagePath: "images/zahavit.jpg"
+  },
+  {
+    id: 3,
+    name: "אילי אברהמי",
+    relation: "אח",
+    description: "אח שלנו אילי מספר בראיון על חייו, הזיכרונות המשפחתיים שלו ומה המשפחה אברהמי אומרת לו.",
+    youtubeId: "1Ytdb3WIU4E",
+    imagePath: "images/Ilay.png"
+  },
+  {
+    id: 4,
+    name: "מעין אברהמי",
+    relation: "אחות",
+    description: "",
+    youtubeId: "",
+    imagePath: "images/מעין.png"
+  },
+  {
+    id: 5,
+    name: "משה אברהמי",
+    relation: "סבא",
+    description: "סבא משה מספר על ילדותו בעיר הקטנה, על העלייה לארץ בשנות החמישים ועל הימים הראשונים בקיבוץ. בראיון הוא משתף בזיכרונות מרגשים מחגי ילדות ומספר כיצד פגש את סבתא רחל.",
+    youtubeId: "dQw4w9WgXcQ",
+    imagePath: "images/saba.jpg"
+  },
+  {
+    id: 6,
     name: "רחל אברהמי",
     relation: "סבתא",
     description: "סבתא רחל מספרת על המשפחה שהשאירה מאחור בפולין, על הגעתה לישראל כילדה קטנה ועל הרגע שבו ראתה לראשונה את הים התיכון. היא גם חושפת מתכון סודי של עוגת התפוחים שאפתה בכל ראש השנה.",
@@ -33,7 +59,7 @@ const familyData = [
     imagePath: "images/savta.jpg"
   },
   {
-    id: 3,
+    id: 7,
     name: "דוד כהן",
     relation: "דוד",
     description: "דוד דוד מספר על שנות השירות הצבאי שלו ועל הקמת העסק המשפחתי. הוא מדבר על הערכים שקיבל מהוריו ועל חשיבות השמירה על המסורת המשפחתית לאורך הדורות.",
@@ -41,7 +67,7 @@ const familyData = [
     imagePath: "images/dod.jpg"
   },
   {
-    id: 4,
+    id: 8,
     name: "מרים לוי",
     relation: "דודה",
     description: "דודה מרים, אחות אמא, מספרת על ילדות משותפת ועל הרגעים הכי מצחיקים שחוו יחד בבית הגדול של סבא וסבתא. היא גם מגלה מה היו החלומות שלה כשהייתה בגיל שלנו.",
@@ -49,19 +75,11 @@ const familyData = [
     imagePath: "images/doda.jpg"
   },
   {
-    id: 5,
+    id: 9,
     name: "יעקב אברהמי",
     relation: "סבא רבא",
     description: "סבא רבא יעקב, בן 91, מספר על חייו לפני קום המדינה. הוא מתאר את השכונה שגדל בה, את הידידויות שנרקמו בין שכנים מעדות שונות, ומשחזר שיחות שלמות בערבית שדיבר עם שכניו בילדות.",
     youtubeId: "dQw4w9WgXcQ",
     imagePath: "images/saba_raba.jpg"
-  },
-  {
-    id: 6,
-    name: "אילי אברהמי",
-    relation: "אח",
-    description: "אח שלנו אילי מספר בראיון על חייו, הזיכרונות המשפחתיים שלו ומה המשפחה אברהמי אומרת לו.",
-    youtubeId: "1Ytdb3WIU4E",
-    imagePath: "images/Ilay.png"
   }
 ];
