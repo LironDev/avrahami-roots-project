@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>עבודת השורשים - נויה ויאיר אברהמי</title>
+
+  <!--
+    ====================================================================
+    הערה חשובה למשתמש / IMPORTANT NOTE FOR GITHUB PAGES:
+    GitHub Pages הוא case-sensitive לגבי שמות קבצים!
+    שם הקובץ בתיקיית images/ חייב להיות זהה בדיוק ל-imagePath ב-JSON,
+    כולל אותיות גדולות/קטנות.
+    לדוגמה: "images/saba.JPG" ≠ "images/saba.jpg"
+    ====================================================================
+  -->
+
+  <style>
+    /* =========================================================
+       GLOBAL RESET & BASE
+    ========================================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --color-bg:        #eef7fb;
+      --color-header-bg: #1a6e8e;
+      --color-header-fg: #ffffff;
+      --color-accent:    #1a90b8;
+      --color-card-bg:   #f0faff;
+      --color-overlay:   rgba(20, 90, 120, 0.82);
+      --color-modal-bg:  #f5fbff;
+      --color-text:      #0d2e3a;
+      --color-muted:     #3a7a96;
+      --radius:          12px;
+      --shadow:          0 4px 20px rgba(20,90,120,0.15);
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      direction: rtl;
+    }
+
+    /* =========================================================
+       LAYOUT — DESKTOP: no vertical scroll, fit to viewport
+    ========================================================= */
+    body {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+    header {
+      background: var(--color-header-bg);
+      color: var(--color-header-fg);
+      text-align: center;
+      padding: 18px 24px 14px;
+      flex-shrink: 0;
+    }
+
+    header h1 {
+      font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1.3;
+    }
+
+    /* =========================================================
+       ABOUT SECTION
+    ========================================================= */
+    .about {
+      background: #d6eef7;
+      border-bottom: 2px solid #7ac4df;
+      padding: 14px 32px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .about p {
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      color: var(--color-muted);
+      line-height: 1.7;
+      max-width: 780px;
+      margin: 0 auto;
+      white-space: pre-line;
+    }
+
+    /* =========================================================
+       GRID AREA
+    ========================================================= */
+    .grid-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 32px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 22px;
+      height: 100%;
+      align-content: center;
+    }
+
+    /* =========================================================
+       THUMBNAIL CARD
+    ========================================================= */
+    .card {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--color-card-bg);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      aspect-ratio: 1 / 1;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(92,61,46,0.25);
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Placeholder when image is missing */
+    .card .img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #a8d8ea, #5aaec8);
+      font-size: 3.5rem;
+      color: #fff;
+      user-select: none;
+    }
+
+    /* Hover overlay */
+    .card .overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--color-overlay);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .card:hover .overlay {
+      opacity: 1;
+    }
+
+    .overlay .name {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .overlay .relation {
+      color: #f5d7a8;
+      font-size: 0.9rem;
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    /* =========================================================
+       MODAL BACKDROP
+    ========================================================= */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    /* =========================================================
+       MODAL BOX
+    ========================================================= */
+    .modal {
+      background: var(--color-modal-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.35);
+      width: 100%;
+      max-width: 900px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      display: flex;
+      flex-direction: row;        /* video on left, text on right (RTL: video right, text left) */
+      gap: 0;
+    }
+
+    /* In RTL, "left" visually is actually the right side in the DOM,
+       so we use flex-direction: row-reverse for RTL layout */
+    .modal {
+      flex-direction: row-reverse;
+    }
+
+    .modal-video {
+      flex: 1 1 55%;
+      min-width: 0;
+      background: #000;
+      border-radius: var(--radius) 0 0 var(--radius);
+    }
+
+    .modal-video iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      border: none;
+      display: block;
+    }
+
+    .modal-info {
+      flex: 1 1 45%;
+      min-width: 0;
+      padding: 28px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .modal-info .modal-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+
+    .modal-info .modal-relation {
+      font-size: 1rem;
+      color: var(--color-muted);
+      border-bottom: 1px solid #e0cbb0;
+      padding-bottom: 10px;
+    }
+
+    .modal-info .modal-description {
+      font-size: 0.97rem;
+      line-height: 1.8;
+      color: var(--color-text);
+      white-space: pre-line;
+    }
+
+    /* Close button */
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      left: 10px;    /* left in DOM = left visually in RTL layout */
+      background: var(--color-header-bg);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.3rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+      z-index: 10;
+    }
+
+    .modal-close:hover {
+      background: var(--color-accent);
+    }
+
+    /* =========================================================
+       MOBILE — allow vertical scroll, stack layout
+    ========================================================= */
+    @media (max-width: 768px) {
+      body {
+        overflow: auto;
+        height: auto;
+      }
+
+      .grid-area {
+        overflow-y: visible;
+        padding: 16px;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        align-content: start;
+        height: auto;
+      }
+
+      .modal {
+        flex-direction: column;
+        max-height: 95vh;
+      }
+
+      .modal-video {
+        flex: none;
+        border-radius: var(--radius) var(--radius) 0 0;
+        min-height: 220px;
+      }
+
+      .modal-video iframe {
+        min-height: 220px;
+      }
+
+      .modal-info {
+        padding: 20px 16px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header>
+    <h1>עבודת השורשים של נויה ויאיר אברהמי - כיתה ז'</h1>
+  </header>
+
+  <!-- ============================================================
+       ABOUT
+  ============================================================ -->
+  <section class="about">
+    <p>ברוכים הבאים לעבודת השורשים שלנו!
+בפרויקט זה יצאנו למסע משפחתי מרתק. שוחחנו עם בני המשפחה, שמענו סיפורים מרגשים על העבר, ולמדנו על השורשים שעיצבו אותנו. אנו מזמינים אתכם ללחוץ על התמונות ולצפות בראיונות שערכנו.</p>
+  </section>
+
+  <!-- ============================================================
+       THUMBNAIL GRID  (built by JS)
+  ============================================================ -->
+  <main class="grid-area">
+    <div class="grid" id="familyGrid"></div>
+  </main>
+
+  <!-- ============================================================
+       MODAL
+  ============================================================ -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose" aria-label="סגור">&#x2715;</button>
+      <div class="modal-video">
+        <iframe
+          id="modalIframe"
+          src=""
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="modal-info">
+        <div class="modal-name"  id="modalName"></div>
+        <div class="modal-relation" id="modalRelation"></div>
+        <div class="modal-description" id="modalDescription"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ==============================================================
+       נתוני המשפחה — ערכו כאן כדי לעדכן את האתר
+       FAMILY DATA — edit this array to update the site
+    ============================================================== */
+    const familyData = [
+      {
+        id: 1,
+        // שם מלא של בן/בת המשפחה
+        name: "משה אברהמי",
+        // הקשר המשפחתי (סבא, סבתא, דוד, דודה וכו')
+        relation: "סבא",
+        // תיאור קצר של הראיון — יוצג בחלון הקופץ לצד הסרטון
+        description: "סבא משה מספר על ילדותו בעיר הקטנה, על העלייה לארץ בשנות החמישים ועל הימים הראשונים בקיבוץ. בראיון הוא משתף בזיכרונות מרגשים מחגי ילדות ומספר כיצד פגש את סבתא רחל.",
+        // מזהה הסרטון ביוטיוב — הוא החלק שאחרי ?v= בקישור יוטיוב
+        // לדוגמה: https://www.youtube.com/watch?v=dQw4w9WgXcQ → "dQw4w9WgXcQ"
+        youtubeId: "dQw4w9WgXcQ",
+        // נתיב התמונה — הקובץ חייב להיות בתיקיית images/ עם אותו שם בדיוק (כולל אותיות גדולות/קטנות!)
+        imagePath: "images/saba.jpg"
+      },
+      {
+        id: 2,
+        name: "רחל אברהמי",
+        relation: "סבתא",
+        description: "סבתא רחל מספרת על המשפחה שהשאירה מאחור בפולין, על הגעתה לישראל כילדה קטנה ועל הרגע שבו ראתה לראשונה את הים התיכון. היא גם חושפת מתכון סודי של עוגת התפוחים שאפתה בכל ראש השנה.",
+        youtubeId: "dQw4w9WgXcQ",
+        imagePath: "images/savta.jpg"
+      },
+      {
+        id: 3,
+        name: "דוד כהן",
+        relation: "דוד",
+        description: "דוד דוד מספר על שנות השירות הצבאי שלו ועל הקמת העסק המשפחתי. הוא מדבר על הערכים שקיבל מהוריו ועל חשיבות השמירה על המסורת המשפחתית לאורך הדורות.",
+        youtubeId: "dQw4w9WgXcQ",
+        imagePath: "images/dod.jpg"
+      },
+      {
+        id: 4,
+        name: "מרים לוי",
+        relation: "דודה",
+        description: "דודה מרים, אחות אמא, מספרת על ילדות משותפת ועל הרגעים הכי מצחיקים שחוו יחד בבית הגדול של סבא וסבתא. היא גם מגלה מה היו החלומות שלה כשהייתה בגיל שלנו.",
+        youtubeId: "dQw4w9WgXcQ",
+        imagePath: "images/doda.jpg"
+      },
+      {
+        id: 5,
+        name: "יעקב אברהמי",
+        relation: "סבא רבא",
+        description: "סבא רבא יעקב, בן 91, מספר על חייו לפני קום המדינה. הוא מתאר את השכונה שגדל בה, את הידידויות שנרקמו בין שכנים מעדות שונות, ומשחזר שיחות שלמות בערבית שדיבר עם שכניו בילדות.",
+        youtubeId: "dQw4w9WgXcQ",
+        imagePath: "images/saba_raba.jpg"
+      },
+      {
+        id: 6,
+        name: "אילי אברהמי",
+        relation: "אח",
+        description: "אח שלנו אילי מספר בראיון על חייו, הזיכרונות המשפחתיים שלו ומה המשפחה אברהמי אומרת לו.",
+        youtubeId: "1Ytdb3WIU4E",
+        imagePath: "images/Ilay.png"
+      }
+    ];
+
+    /* ==============================================================
+       DOM REFERENCES
+    ============================================================== */
+    const grid         = document.getElementById("familyGrid");
+    const backdrop     = document.getElementById("modalBackdrop");
+    const modalClose   = document.getElementById("modalClose");
+    const modalIframe  = document.getElementById("modalIframe");
+    const modalName    = document.getElementById("modalName");
+    const modalRelation= document.getElementById("modalRelation");
+    const modalDesc    = document.getElementById("modalDescription");
+
+    /* ==============================================================
+       BUILD GRID CARDS
+    ============================================================== */
+    familyData.forEach(person => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", `${person.name} — ${person.relation}`);
+
+      // Image or placeholder emoji
+      const imgEl = document.createElement("img");
+      imgEl.alt  = person.name;
+      imgEl.src  = person.imagePath;
+      imgEl.onerror = function () {
+        // If image not found, show a friendly placeholder
+        this.replaceWith(createPlaceholder(person.relation));
+      };
+
+      const overlay = document.createElement("div");
+      overlay.className = "overlay";
+      overlay.innerHTML = `
+        <span class="name">${person.name}</span>
+        <span class="relation">${person.relation}</span>
+      `;
+
+      card.appendChild(imgEl);
+      card.appendChild(overlay);
+
+      // Open modal on click or Enter key
+      card.addEventListener("click", () => openModal(person));
+      card.addEventListener("keydown", e => {
+        if (e.key === "Enter" || e.key === " ") openModal(person);
+      });
+
+      grid.appendChild(card);
+    });
+
+    /* ==============================================================
+       PLACEHOLDER (when image file is missing)
+    ============================================================== */
+    function createPlaceholder(relation) {
+      const emojiMap = {
+        "סבא": "👴", "סבתא": "👵", "דוד": "👨", "דודה": "👩",
+        "אבא": "👨‍👦", "אמא": "👩‍👧", "סבא רבא": "🧓", "סבתא רבתא": "👵"
+      };
+      const div = document.createElement("div");
+      div.className = "img-placeholder";
+      div.textContent = emojiMap[relation] || "🧑";
+      return div;
+    }
+
+    /* ==============================================================
+       MODAL — OPEN
+    ============================================================== */
+    function openModal(person) {
+      modalName.textContent      = person.name;
+      modalRelation.textContent  = person.relation;
+      modalDesc.textContent      = person.description;
+
+      // Build YouTube embed URL dynamically
+      modalIframe.src = `https://www.youtube.com/embed/${person.youtubeId}?autoplay=1`;
+
+      backdrop.classList.add("open");
+      document.body.style.overflow = "hidden";  // prevent background scroll on mobile
+      modalClose.focus();
+    }
+
+    /* ==============================================================
+       MODAL — CLOSE
+    ============================================================== */
+    function closeModal() {
+      backdrop.classList.remove("open");
+      // Clear iframe src to stop video playback
+      modalIframe.src = "";
+      document.body.style.overflow = "";
+    }
+
+    modalClose.addEventListener("click", closeModal);
+
+    // Close when clicking the backdrop (outside the modal box)
+    backdrop.addEventListener("click", e => {
+      if (e.target === backdrop) closeModal();
+    });
+
+    // Close with Escape key
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && backdrop.classList.contains("open")) closeModal();
+    });
+  </script>
+
+</body>
+</html>
