@@ -87,8 +87,8 @@ familyData.forEach(person => {
   `;
 
   // מספרים רנדומליים לצפיות ולייקים
-  const baseViews = Math.floor(Math.random() * 451) + 50;   // 50–500
-  const baseLikes = Math.floor(Math.random() * 91)  + 10;   // 10–100
+  const baseViews = Math.floor(Math.random() * 9500) + 1200;  // 1,200–10,700
+  const baseLikes = Math.floor(Math.random() * 900)  + 200;   // 200–1,100
   let likes    = baseLikes;
   let liked    = false;
 
@@ -100,13 +100,13 @@ familyData.forEach(person => {
         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
         <circle cx="12" cy="12" r="3"/>
       </svg>
-      <span class="views-count">${baseViews}</span>
+      <span class="views-count">${baseViews.toLocaleString()}</span>
     </span>
     <span class="stat likes" role="button" tabindex="0" aria-label="לייק">
       <svg class="heart-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
       </svg>
-      <span class="likes-count">${likes}</span>
+      <span class="likes-count">${likes.toLocaleString()}</span>
     </span>
   `;
 
@@ -119,7 +119,7 @@ familyData.forEach(person => {
     e.stopPropagation(); // לא לפתוח את המודאל
     liked = !liked;
     likes = liked ? baseLikes + 1 : baseLikes;
-    likeCount.textContent = likes;
+    likeCount.textContent = likes.toLocaleString();
     heartIcon.classList.toggle("liked", liked);
 
     // אנימציית פעימה
