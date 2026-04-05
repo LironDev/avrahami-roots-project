@@ -87,7 +87,7 @@ header h1 {
 }
 
 .about-text p {
-  font-size: clamp(0.82rem, 1.4vw, 0.97rem);
+  font-size: clamp(0.95rem, 1.6vw, 1.13rem);
   color: var(--color-muted);
   line-height: 1.6;
 }
