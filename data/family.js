@@ -75,6 +75,14 @@ const familyData = [
     imagePath: "images/savta.jpg"
   },
   {
+    id: 10,
+    name: "זהבה מנחם",
+    relation: "סבתא רבתא",
+    description: "זהבה היא סבתא רבתא של יאיר ונויה והיא אמא של סבתא עירית. בראיון המיוחד שלה היא מספרת על חייה ועל הדורות שקדמו לנו, ומשתפת בסיפורים שחשוב לנו לדעת ולזכור.",
+    youtubeId: "BLWSHRkpiuQ",
+    imagePath: "images/Zahava.png"
+  },
+  {
     id: 9,
     name: "לימור גנקין",
     relation: "דודה",
