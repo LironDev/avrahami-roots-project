@@ -63,7 +63,7 @@ const familyData = [
     name: "רחמים אברהמי",
     relation: "סבא",
     description: "רחמים הוא סבא בן 71 של נויה ויאיר והוא אבא של לירון אבא שלנו, ובסרטון הוא מספר על ילדותו ועל המקום שבו התגורר. הוא משתף במה שעשה בימי ילדותו ובאיזה רגעים שריגשו אותו ושנשארו איתו עד היום.",
-    youtubeId: "dQw4w9WgXcQ",
+    youtubeId: "xkFGCRuyo5o",
     imagePath: "images/saba_raba.jpg"
   },
   {
@@ -71,7 +71,7 @@ const familyData = [
     name: "רותי אברהמי",
     relation: "סבתא",
     description: "רותי היא סבתא בת 68 של יאיר ונויה והיא אמא של לירון אבא שלנו, ובסרטון היא מספרת על ילדותה ועל המקום שבו התגוררה. היא משתפת במנהגים שהיו בבית שלה וביחד עם המשפחה, ובאיזה רגעים היא הייתה הכי שמחה ומאושרת.",
-    youtubeId: "dQw4w9WgXcQ",
+    youtubeId: "s9a4AfgjI7o",
     imagePath: "images/savta.jpg"
   },
   {
