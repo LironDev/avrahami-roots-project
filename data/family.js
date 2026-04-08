@@ -64,7 +64,7 @@ const familyData = [
     relation: "סבא",
     description: "רחמים הוא סבא בן 71 של נויה ויאיר והוא אבא של לירון אבא שלנו, ובסרטון הוא מספר על ילדותו ועל המקום שבו התגורר. הוא משתף במה שעשה בימי ילדותו ובאיזה רגעים שריגשו אותו ושנשארו איתו עד היום.",
     youtubeId: "xkFGCRuyo5o",
-    imagePath: "images/saba_raba.jpg"
+    imagePath: "images/Rahamim.png"
   },
   {
     id: 7,
@@ -72,7 +72,7 @@ const familyData = [
     relation: "סבתא",
     description: "רותי היא סבתא בת 68 של יאיר ונויה והיא אמא של לירון אבא שלנו, ובסרטון היא מספרת על ילדותה ועל המקום שבו התגוררה. היא משתפת במנהגים שהיו בבית שלה וביחד עם המשפחה, ובאיזה רגעים היא הייתה הכי שמחה ומאושרת.",
     youtubeId: "s9a4AfgjI7o",
-    imagePath: "images/savta.jpg"
+    imagePath: "images/Ruti.png"
   },
   {
     id: 10,
